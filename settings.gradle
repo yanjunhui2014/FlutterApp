@@ -10,7 +10,8 @@ if (local.exists()) {
         setBinding(new Binding([gradle: this]))
         evaluate(new File('/Users/junhui/flutter/fz_flutter_share/.android/include_flutter.groovy'))
 
-        include 'fz_flutter_share'
-        project(':fz_flutter_share').projectDir = new File('/Users/junhui/flutter/fz_flutter_share')
+        include ':fz_flutter_share'
+        project(':fz_flutter_share').projectDir = new File('../../../flutter/fz_flutter_share')
     }
 }
+

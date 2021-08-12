@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         EventBusMethodCallHandler callHandler = new EventBusMethodCallHandler();
         new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), callHandler.channelName())
                 .setMethodCallHandler(callHandler);
+        new MethodChannel(FlutterEngineManager.getInstance().getFlutterEngine().getDartExecutor().getBinaryMessenger(), callHandler.channelName())
+                .setMethodCallHandler(callHandler);
 
         EventBus.getDefault().register(this);
     }

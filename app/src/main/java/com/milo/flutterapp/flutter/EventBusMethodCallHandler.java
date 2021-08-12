@@ -28,13 +28,16 @@ public class EventBusMethodCallHandler implements MethodChannel.MethodCallHandle
         String methodName = call.method;
 
         if (System.currentTimeMillis() - lastTime < 300) {
+            result.success("fail");
             return;
         }
         lastTime = System.currentTimeMillis();
 
         if ("move".equals(methodName)) {
+            result.success("success");
             EventBus.getDefault().post(new ActionEvent("用户 >> 移动 << 了红点"));
         } else if ("click".equals(methodName)) {
+            result.success("success");
             EventBus.getDefault().post(new ActionEvent("用户 >> 点击 << 了屏幕"));
         } else {
             result.notImplemented();

@@ -58,13 +58,13 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    if (props['isProjectFlutterShare'] != null && props['isProjectFlutterShare'].toBoolean()) {
+//    if (props['isProjectFlutterShare'] != null && props['isProjectFlutterShare'].toBoolean()) {
         implementation project(path: ':flutter')
-    } else {
-        debugImplementation 'com.milo.fz_flutter_share:flutter_debug:1.0'
-        profileImplementation 'com.milo.fz_flutter_share:flutter_profile:1.0'
-        releaseImplementation 'com.milo.fz_flutter_share:flutter_release:1.0'
-    }
+//    } else {
+//        debugImplementation 'com.milo.fz_flutter_share:flutter_debug:1.0'
+//        profileImplementation 'com.milo.fz_flutter_share:flutter_profile:1.0'
+//        releaseImplementation 'com.milo.fz_flutter_share:flutter_release:1.0'
+//    }
 
     implementation "org.greenrobot:eventbus:3.0.0"
     implementation "com.github.bumptech.glide:glide:3.7.0"

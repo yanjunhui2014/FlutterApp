@@ -1,0 +1,71 @@
+plugins {
+    id 'com.android.application'
+}
+
+Properties props = new Properties()
+File local = file("local.properties")
+if (local.exists()) {
+    props.load(new FileInputStream(file("local.properties")))
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.milo.flutterapp"
+        minSdkVersion 17 //不得小于16，16以下flutter不支持
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        profile {
+            initWith debug
+        }
+    }
+
+    //必须使用java1.8及以上编译，否则flutter不支持
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    if (props['isProjectFlutterShare'] != null && props['isProjectFlutterShare'].toBoolean()) {
+        implementation project(path: ':flutter')
+    } else {
+        debugImplementation 'com.milo.fz_flutter_share:flutter_debug:1.0'
+        profileImplementation 'com.milo.fz_flutter_share:flutter_profile:1.0'
+        releaseImplementation 'com.milo.fz_flutter_share:flutter_release:1.0'
+    }
+
+    implementation "org.greenrobot:eventbus:3.0.0"
+    implementation "com.github.bumptech.glide:glide:3.7.0"
+}

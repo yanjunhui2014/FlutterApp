@@ -1,0 +1,16 @@
+include ':app'
+rootProject.name = "FlutterApp"
+
+Properties props = new Properties()
+File local = file("local.properties")
+if (local.exists()) {
+    props.load(new FileInputStream(file("local.properties")))
+
+    if (props['isProjectFlutterShare'] != null && props['isProjectFlutterShare'].toBoolean()) {
+        setBinding(new Binding([gradle: this]))
+        evaluate(new File('/Users/junhui/flutter/fz_flutter_share/.android/include_flutter.groovy'))
+
+        include 'fz_flutter_share'
+        project(':fz_flutter_share').projectDir = new File('/Users/junhui/flutter/fz_flutter_share')
+    }
+}
